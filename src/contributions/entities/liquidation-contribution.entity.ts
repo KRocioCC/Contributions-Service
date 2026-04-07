@@ -10,7 +10,7 @@ import {
 import { Contribution } from './';
 import { Liquidation } from './';
 
-@Entity({ schema: 'public', name: 'liquidation_contributions', synchronize: false })
+@Entity({ schema: 'contributions', name: 'liquidation_contributions', synchronize: false })
 export class LiquidationContribution {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
@@ -30,9 +30,9 @@ export class LiquidationContribution {
   @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
   deletedAt: Date;
 
-  @ManyToOne(() => Contribution, (contribution) => contribution.id)
+  @ManyToOne(() => Contribution, (contribution) => contribution.liquidationContributions)
   contribution: Contribution;
 
-  @ManyToOne(() => Liquidation, (liquidation) => liquidation.id)
+  @ManyToOne(() => Liquidation, (liquidation) => liquidation.liquidationContributions)
   liquidation: Liquidation;
 }

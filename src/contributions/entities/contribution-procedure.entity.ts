@@ -9,15 +9,15 @@ import {
 } from 'typeorm';
 import { Liquidation } from './';
 
-@Entity({ schema: 'public', name: 'contribution_procedures', synchronize: false })
+@Entity({ schema: 'contributions', name: 'contribution_procedures', synchronize: false })
 export class ContributionProcedure {
-  @PrimaryGeneratedColumn({ type: 'bigint' })
+  @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
 
-  @Column({ name: 'affiliate_id', type: 'bigint' })
+  @Column({ name: 'affiliate_id', type: 'int' })
   affiliateId: number;
 
-  @Column({ name: 'modality_id', type: 'bigint' })
+  @Column({ name: 'modality_id', type: 'int' })
   modalityId: number;
 
   @Column({ type: 'varchar', length: 255 })

@@ -11,15 +11,15 @@ import {
   OneToMany,
 } from 'typeorm';
 
-@Entity({ schema: 'public', name: 'liquidations', synchronize: false })
+@Entity({ schema: 'contributions', name: 'liquidations', synchronize: false })
 export class Liquidation {
-  @PrimaryGeneratedColumn({ type: 'bigint' })
+  @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
 
-  @Column({ name: 'contribution_procedure_id', type: 'bigint' })
+  @Column({ name: 'contribution_procedure_id', type: 'int' })
   contributionProcedureId: number;
 
-  @Column({ type: 'bigint' })
+  @Column({ type: 'int' })
   number: number;
 
   @Column({ type: 'numeric', precision: 10, scale: 2 })
@@ -34,9 +34,10 @@ export class Liquidation {
   @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
   deletedAt: Date;
 
-  @ManyToOne(() => ContributionProcedure, (procedure) => procedure.id)
+  @ManyToOne(() => ContributionProcedure, (contributionProcedure) => contributionProcedure.liquidations)
   contributionProcedure: ContributionProcedure;
 
-  @OneToMany(() => LiquidationContribution, (liquidationcontribution) => liquidationcontribution.liquidation)
+  @OneToMany(() => LiquidationContribution, (liquidationContribution) => liquidationContribution.liquidation)
   liquidationContributions: LiquidationContribution[];
+
 }
